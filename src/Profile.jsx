@@ -8,14 +8,14 @@ class Profile extends Component {
   }
 
   render(){
-    console.log("props", this.props);
-
     let artist={
       name: '',
-      stats: {listeners: '', playcount: ''},
-      image: [{},{},{},{},{}],
-      tags: {tag: []}
-    }
+      followers: {
+        total: ""
+      },
+      images: [{url: ''}],
+      genres: []
+    };
     artist = this.props.artist !== null ? this.props.artist : artist;
 
     return(
@@ -23,19 +23,19 @@ class Profile extends Component {
         <img
           alt="Profile Image"
           className="profile-img"
-          src={artist.image[4]['#text']}
+          src={artist.images[0].url}
           />
         <div className="profile-info">
           <div className="profile-name">{artist.name}</div>
-          <div className="profile-followers">{artist.stats.listeners} followers</div>
+          <div className="profile-followers">{artist.followers.total} followers</div>
           <div className="profile-genres">
             {
-              artist.tags.tag.map((tag, k) => {
-                tag.name = (tag !== artist.tags.tag[artist.tags.tag.length-1])
-                                ? (` ${tag.name},`)
-                                : (` & ${tag.name}`);
+              artist.genres.map((genre, k) => {
+                genre = (genre !== artist.genres[artist.genres.length-1])
+                                ? (` ${genre} |`)
+                                : (` ${genre}`);
                 return(
-                  <span key={k}>{tag.name}</span>
+                  <span key={k}>{genre}</span>
                 )
               })
             }
